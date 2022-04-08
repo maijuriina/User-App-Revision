@@ -8,17 +8,17 @@ import NewUser from "./components/NewUser/NewUser";
 const DUMMY_USERS = [
   {
     id: 0,
-    userName: "Bill",
+    userName: "Kasper",
     userAge: 60,
   },
   {
     id: 1,
-    userName: "Gabriel",
+    userName: "Jesper",
     userAge: 50,
   },
   {
     id: 2,
-    userName: "Laura",
+    userName: "Joonatan",
     userAge: 30,
   },
 ];

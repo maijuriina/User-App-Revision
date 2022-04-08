@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import Card from "../UI/Card";
 import classes from "./UserForm.module.css";
 import Button from "../UI/Button";
+import ErrorModal from "../UI/ErrorModal";
 
 const UserForm = (props) => {
   const [userInput, setUserInput] = useState({
@@ -28,8 +29,10 @@ const UserForm = (props) => {
       userInput.userName.trim().length === 0 ||
       userInput.userAge.trim().length === 0
     ) {
-      console.log("invalid input");
-      return;
+      <ErrorModal
+        title="Empty submission field"
+        message="Please enter a valid username and age."
+      />;
     }
 
     const userFormData = {
@@ -47,35 +50,41 @@ const UserForm = (props) => {
   };
 
   return (
-    <Card>
-      <form onSubmit={submitHandler}>
-        <label className={classes.label} htmlFor="username">
-          Username
-        </label>
-        <input
-          className={classes.input}
-          id="username"
-          type="text"
-          value={userInput.userName}
-          onChange={userNameChangeHandler}
-        ></input>
+    <div>
+      <ErrorModal
+        title="Empty submission field"
+        message="Please enter a valid username and age."
+      />
+      <Card>
+        <form onSubmit={submitHandler}>
+          <label className={classes.label} htmlFor="username">
+            Username
+          </label>
+          <input
+            className={classes.input}
+            id="username"
+            type="text"
+            value={userInput.userName}
+            onChange={userNameChangeHandler}
+          ></input>
 
-        <label className={classes.label} htmlFor="age">
-          Age
-        </label>
-        <input
-          className={classes.input}
-          id="age"
-          type="number"
-          min="0"
-          value={userInput.userAge}
-          onChange={userAgeChangeHandler}
-        ></input>
-        <Button className={classes.button} type="submit">
-          <span className="buttonText">Submit</span>
-        </Button>
-      </form>
-    </Card>
+          <label className={classes.label} htmlFor="age">
+            Age
+          </label>
+          <input
+            className={classes.input}
+            id="age"
+            type="number"
+            min="0"
+            value={userInput.userAge}
+            onChange={userAgeChangeHandler}
+          ></input>
+          <Button className={classes.button} type="submit">
+            <span className="buttonText">Submit</span>
+          </Button>
+        </form>
+      </Card>
+    </div>
   );
 };
 
