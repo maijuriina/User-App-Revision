@@ -27,7 +27,6 @@ const UserForm = (props) => {
     };
 
     props.onSubmitUserData(userFormData);
-    console.log(userFormData);
 
     // reset data
     setUserInput({
@@ -52,7 +51,9 @@ const UserForm = (props) => {
         value={userInput.userAge}
         onChange={userAgeChangeHandler}
       ></input>
-      <button type="submit">Submit</button>
+      <button type="submit">
+        <span className="buttonText">Submit</span>
+      </button>
     </form>
   );
 };
