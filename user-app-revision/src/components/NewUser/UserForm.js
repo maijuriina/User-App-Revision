@@ -1,7 +1,7 @@
 import "./UserForm.css";
 import { useState } from "react";
 
-const UserForm = () => {
+const UserForm = (props) => {
   const [userInput, setUserInput] = useState({
     userName: "",
     userAge: "",
@@ -26,6 +26,7 @@ const UserForm = () => {
       userAge: userInput.userAge,
     };
 
+    props.onSubmitUserData(userFormData);
     console.log(userFormData);
 
     // reset data
