@@ -10,6 +10,8 @@ const UserForm = (props) => {
     userAge: "",
   });
 
+  const [error, setError] = useState();
+
   const userNameChangeHandler = (event) => {
     setUserInput((prevState) => {
       return { ...prevState, userName: event.target.value };
@@ -29,10 +31,11 @@ const UserForm = (props) => {
       userInput.userName.trim().length === 0 ||
       userInput.userAge.trim().length === 0
     ) {
-      <ErrorModal
-        title="Empty submission field"
-        message="Please enter a valid username and age."
-      />;
+      setError({
+        title: "Invalid input",
+        message: "Please enter a valid username and age",
+      });
+      return;
     }
 
     const userFormData = {
@@ -49,12 +52,20 @@ const UserForm = (props) => {
     });
   };
 
+  // below clears error
+  const errorHandler = () => {
+    setError(null);
+  };
+
   return (
     <div>
-      <ErrorModal
-        title="Empty submission field"
-        message="Please enter a valid username and age."
-      />
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
       <Card>
         <form onSubmit={submitHandler}>
           <label className={classes.label} htmlFor="username">
