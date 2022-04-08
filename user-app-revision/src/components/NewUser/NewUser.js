@@ -1,5 +1,6 @@
 import "./NewUser.css";
 import UserForm from "./UserForm";
+import React from "react";
 
 const NewUser = (props) => {
   const saveUserDataHandler = (enteredUserData) => {
@@ -7,7 +8,6 @@ const NewUser = (props) => {
       ...enteredUserData,
       id: Math.random().toString(),
     };
-    console.log(userData);
     props.onAddUser(userData); // property called in App.js to pass data
   };
 
