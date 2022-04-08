@@ -1,5 +1,6 @@
-import "./UserForm.css";
 import { React, useState } from "react";
+import Card from "../UI/Card";
+import classes from "./UserForm.module.css";
 
 const UserForm = (props) => {
   const [userInput, setUserInput] = useState({
@@ -37,27 +38,35 @@ const UserForm = (props) => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <label htmlFor="username">Username</label>
-      <input
-        id="username"
-        type="text"
-        value={userInput.userName}
-        onChange={userNameChangeHandler}
-      ></input>
+    <Card>
+      <form onSubmit={submitHandler}>
+        <label className={classes.label} htmlFor="username">
+          Username
+        </label>
+        <input
+          className={classes.input}
+          id="username"
+          type="text"
+          value={userInput.userName}
+          onChange={userNameChangeHandler}
+        ></input>
 
-      <label htmlFor="age">Age</label>
-      <input
-        id="age"
-        type="number"
-        min="0"
-        value={userInput.userAge}
-        onChange={userAgeChangeHandler}
-      ></input>
-      <button type="submit">
-        <span className="buttonText">Submit</span>
-      </button>
-    </form>
+        <label className={classes.label} htmlFor="age">
+          Age
+        </label>
+        <input
+          className={classes.input}
+          id="age"
+          type="number"
+          min="0"
+          value={userInput.userAge}
+          onChange={userAgeChangeHandler}
+        ></input>
+        <button className={classes.button} type="submit">
+          <span className="buttonText">Submit</span>
+        </button>
+      </form>
+    </Card>
   );
 };
 
