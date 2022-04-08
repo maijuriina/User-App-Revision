@@ -24,6 +24,14 @@ const UserForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
+    if (
+      userInput.userName.trim().length === 0 ||
+      userInput.userAge.trim().length === 0
+    ) {
+      console.log("invalid input");
+      return;
+    }
+
     const userFormData = {
       userName: userInput.userName,
       userAge: userInput.userAge,
