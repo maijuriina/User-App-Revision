@@ -1,7 +1,7 @@
-import "./UserList.css";
 import Card from "../UI/Card";
 import UserItem from "./UserItem";
 import React from "react";
+import classes from "./UserList.module.css";
 
 const UserList = (props) => {
   if (props.items.length === 0) {
@@ -13,15 +13,17 @@ const UserList = (props) => {
   }
 
   return (
-    <ul>
-      {props.items.map((user) => (
-        <UserItem
-          key={user.id}
-          userName={user.userName}
-          userAge={user.userAge}
-        />
-      ))}
-    </ul>
+    <Card className={classes.users}>
+      <ul>
+        {props.items.map((user) => (
+          <UserItem
+            key={user.id}
+            userName={user.userName}
+            userAge={user.userAge}
+          />
+        ))}
+      </ul>
+    </Card>
   );
 };
 
