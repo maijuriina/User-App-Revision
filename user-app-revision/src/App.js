@@ -33,13 +33,13 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <React.Fragment>
       <Card>
         <h2>User App (revision)</h2>
         <NewUser onAddUser={addUserHandler} />
         <UserList items={users} />
       </Card>
-    </div>
+    </React.Fragment>
   );
 };
 
