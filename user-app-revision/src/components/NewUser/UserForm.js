@@ -1,18 +1,22 @@
-import { React, useState, Fragment } from "react";
+import { React, useState, Fragment, useRef } from "react";
 import Card from "../UI/Card";
 import classes from "./UserForm.module.css";
 import Button from "../UI/Button";
 import ErrorModal from "../UI/ErrorModal";
 
 const UserForm = (props) => {
-  const [userInput, setUserInput] = useState({
+  const userInputNameRef = useRef();
+  const userInputAgeRef = useRef();
+
+  /*   const [userInput, setUserInput] = useState({
     userName: "",
     userAge: "",
-  });
+  }); */
 
   const [error, setError] = useState();
 
-  const userNameChangeHandler = (event) => {
+  // with useState
+  /*   const userNameChangeHandler = (event) => {
     setUserInput((prevState) => {
       return { ...prevState, userName: event.target.value };
     });
@@ -22,15 +26,14 @@ const UserForm = (props) => {
     setUserInput((prevState) => {
       return { ...prevState, userAge: event.target.value };
     });
-  };
+  }; */
 
   const submitHandler = (event) => {
     event.preventDefault();
+    const enteredName = userInputNameRef.current.value; // ref only takes the value as submit-button is pressed instead of monitoring all changes
+    const enteredAge = userInputAgeRef.current.value;
 
-    if (
-      userInput.userName.trim().length === 0 ||
-      userInput.userAge.trim().length === 0
-    ) {
+    if (enteredName.trim().length === 0 || enteredAge.trim().length === 0) {
       setError({
         title: "Invalid input",
         message: "Please enter a valid username and age",
@@ -39,17 +42,21 @@ const UserForm = (props) => {
     }
 
     const userFormData = {
-      userName: userInput.userName,
-      userAge: userInput.userAge,
+      userName: enteredName,
+      userAge: enteredAge,
     };
 
     props.onSubmitUserData(userFormData);
 
-    // reset data
-    setUserInput({
+    // reset data (with useState)
+    /*     setUserInput({
       userName: "",
       userAge: "",
-    });
+    }); */
+
+    // reset data with ref (typically DO NOT MODIFY DOM DIRECTLY!!)
+    userInputNameRef.current.value = "";
+    userInputAgeRef.current.value = "";
   };
 
   // below clears error
@@ -75,8 +82,9 @@ const UserForm = (props) => {
             className={classes.input}
             id="username"
             type="text"
-            value={userInput.userName}
-            onChange={userNameChangeHandler}
+            /*with useState         value={userInput.userName}
+            onChange={userNameChangeHandler} */
+            ref={userInputNameRef}
           ></input>
 
           <label className={classes.label} htmlFor="age">
@@ -87,8 +95,9 @@ const UserForm = (props) => {
             id="age"
             type="number"
             min="0"
-            value={userInput.userAge}
-            onChange={userAgeChangeHandler}
+            /* with useState         value={userInput.userAge}
+            onChange={userAgeChangeHandler} */
+            ref={userInputAgeRef}
           ></input>
           <Button className={classes.button} type="submit">
             <span className="buttonText">Submit</span>
